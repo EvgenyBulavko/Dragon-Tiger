@@ -1,6 +1,6 @@
 import React from 'react';
 
-import style from './Game.module.scss';
+import './Game.scss';
 
 export const Game = () => {
   return (
