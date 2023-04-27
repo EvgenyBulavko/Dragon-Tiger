@@ -1,0 +1,178 @@
+.game {
+    height: 100vh;
+    font-size: 35px;
+    background-color: #000000;
+}
+.game-body {
+    display: flex;
+    justify-content: center;
+    transform-origin: 50% 0%;
+    transform: perspective(2000px) rotateX(25deg);
+}
+.game-body-wrapper {
+    // border-left: 2rem solid rgb(96, 91, 40);
+    // border-right: 2rem solid rgb(96, 91, 40);
+    // border-bottom: 2rem solid rgb(96, 91, 40);
+    padding: 0 2rem 2rem 2rem;
+    border-bottom-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+    // border-image-source: url(../../assets/img/texture.jpg);
+    // border-image-slice: 20;
+    background-image: url(../../assets/img/texture.jpg);
+}
+.game-body-wrapper-border{
+    border-left: 0.2rem solid rgb(240, 246, 69);
+    border-right: 0.2rem solid rgb(240, 246, 69);
+    border-bottom: 0.2rem solid rgb(240, 246, 69);
+    border-bottom-left-radius: 17%;
+    border-bottom-right-radius: 17%;
+    background-color: #1a4219;
+    -webkit-box-shadow: 1px -5px 10px 7px rgba(34, 60, 80, 0.32) inset;
+-moz-box-shadow: 1px -5px 10px 7px rgba(34, 60, 80, 0.32) inset;
+box-shadow: 1px -5px 10px 7px rgba(34, 60, 80, 0.32) inset;
+}
+.game-body-wrapper-border-external{
+    border-left: 0.2rem solid rgb(240, 246, 69);
+    border-right: 0.2rem solid rgb(240, 246, 69);
+    border-bottom: 0.2rem solid rgb(240, 246, 69);
+    border-bottom-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+}
+.game_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+.dragon {
+    width: 10rem;
+    height: 20rem;
+    border: 2px solid black ;
+    cursor: pointer;
+
+}
+.tiger {
+    width: 10rem;
+    height: 20rem;
+    border: 2px solid black ;
+    cursor: pointer;
+}
+.cards {
+    width: 10rem;
+    height: 20rem;
+    border: 2px solid black ;
+    cursor: pointer;
+}
+
+.game-bid {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.game-bid-dragon {
+    width: 20rem;
+    height: 10rem;
+    border: 2px solid black ;
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+.game-bid-tie {
+    width: 8rem;
+    height: 10rem;
+    border: 2px solid black ;
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+.game-bid-tiger {
+    width: 20rem;
+    height: 10rem;
+    border: 2px solid black ;
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+.text-bet {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #e8b404;
+}
+
+.game-chips {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.active {
+    background-color: rgb(255, 245, 232);
+    opacity: 0.5;
+}
+
+.game-bid-dragon-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 20rem
+}
+.game-bid-dragon-side-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.game-bid-tiger-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 20rem
+}
+.game-bid-tiger-side-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.game-bid-size {
+    width: 5rem;
+    height: 5rem;
+    border: 2px solid black ;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.game-bid-big  {
+    font-size: 0.8em;
+    width: 7.5rem;
+    color: #e8b404;
+}
+.game-bid-small {
+    font-size: 0.8em;
+    width: 7.5rem;
+    color: #e8b404;
+}
+
+.game-bid-clubs {
+    background-image: url(../../assets/img/club.png);
+}
+.game-bid-diamonds {
+    background-image: url(../../assets/img/diamonds.png);
+}
+.game-bid-hearts  {
+    background-image: url(../../assets/img/heart.png);
+}
+.game-bid-spades{
+    background-image: url(../../assets/img/spade.png);
+}

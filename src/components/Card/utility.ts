@@ -1,11 +1,11 @@
 import { PlayingCard } from '../../common/types';
 import { cardSuits, cardValues } from '../../common/allData';
 
-const leftStep = 150;
-const topStep = 200;
+const leftStep = 341;
+const topStep = 473.5;
 
 export const getCardSpriteCoordinates = ({ suit, value }: PlayingCard) => {
-  const leftCoordinate = cardValues.indexOf(value) * leftStep;
+  const leftCoordinate = value === 'backward' ? 13 * leftStep: cardValues.indexOf(value) * leftStep;
   const topCoordinate = cardSuits.indexOf(suit) * topStep;
 
   return {

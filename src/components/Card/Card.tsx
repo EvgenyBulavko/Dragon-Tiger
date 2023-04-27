@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { PlayingCard } from '../../common/types';
+import React, { useEffect, useState } from 'react';
+import { PlayingCard, TypeCard } from '../../common/types';
 import { getCardSpriteCoordinates } from './utility';
 import CardSprite from '../../assets/img/cards.svg';
 import CardS from '../../assets/img/cardsSun.png';
@@ -9,32 +9,27 @@ import * as PIXI from 'pixi.js';
 import './Card.scss';
 import { Sprite } from '@pixi/react';
 
-export const Card = ({ suit, value }: PlayingCard) => {
+export const Card = ({ suit, value, x, y, onClick }: TypeCard) => {
   const { leftCoordinate, topCoordinate } = getCardSpriteCoordinates({ suit, value });
   
-  const [scale, setScale] = useState({ x: 1, y: 1 });
-  const [xCard, setXCard] = useState(750);
-  const [yCard, setYCard] = useState(150);
+  const [xCard, setXCard] = useState(x);
+  const [yCard, setYCard] = useState(y);
+  // const [texture, setTexture] = useState<any>(PIXI.Texture.from(CardS, { resourceOptions: 1 }));
 
-  const ImgTable = () => {
-    const texture = PIXI.Texture.from(CardS, { resourceOptions: 1 });
-     let rectangle = new PIXI.Rectangle(0,0,140,190);
+
+  const spriteCard = () => {
      
-    // console.log(rectangle);
-    console.log(texture);
-     texture.frame = rectangle;
-     console.log(texture.frame);
-      return <Sprite texture={texture} x={xCard} y={yCard} width={150} height={250} interactive={true}   pointerdown={() => {
+        const textureBase = PIXI.BaseTexture.from(CardS);
+        const texture = new PIXI.Texture(textureBase, new PIXI.Rectangle(leftCoordinate,topCoordinate,340,470))
+
+      return <Sprite texture={texture} x={xCard} y={yCard} width={100} height={140} interactive={true}   pointerdown={() => {
         console.log("click");
-        setXCard(xCard+1);
-        setYCard(yCard+1);
-      }}/>;
+        if(onClick){
+          onClick();
+        }}} />
+      
   }
 
-  const load = async() =>{
-    return PIXI.Texture.from(CardS, { resourceOptions: 1 });
-  }
- 
   
   // const ImgTable = () => (
   //   <CardSprite viewBox={`${leftCoordinate} ${topCoordinate} 140 190`} />
@@ -54,7 +49,7 @@ export const Card = ({ suit, value }: PlayingCard) => {
         setScale({ x: scale.x*1.25, y: scale.y*1.25 })
       }} */}
       
-      <ImgTable  />
+      {spriteCard()}
       {/* </div> */}
       {/* <div className=".cardBack">
         <BackwardIcon />
