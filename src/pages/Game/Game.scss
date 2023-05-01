@@ -1,13 +1,14 @@
 .game {
+    display: flex;
+    justify-content: center;
     height: 100vh;
     font-size: 35px;
     background-color: #000000;
 }
 .game-body {
-    display: flex;
     justify-content: center;
-    transform-origin: 50% 0%;
-    transform: perspective(2000px) rotateX(25deg);
+    // transform-origin: 50% 0%;
+    // transform: perspective(2000px) rotateX(25deg);
 }
 .game-body-wrapper {
     // border-left: 2rem solid rgb(96, 91, 40);
@@ -73,47 +74,39 @@ box-shadow: 1px -5px 10px 7px rgba(34, 60, 80, 0.32) inset;
     gap: 2rem;
 }
 
-.game-bid-dragon {
-    width: 20rem;
-    height: 10rem;
-    border: 2px solid black ;
-    cursor: pointer;
-    border-radius: 10px;
-
-}
 .game-bid-tie {
     width: 8rem;
     height: 10rem;
-    border: 2px solid black ;
+    border: 2px solid #2b542a;
     cursor: pointer;
     border-radius: 10px;
+    box-shadow: inset #071f06 -3px -3px 20px 0px;
+    background: #144712;
 
 }
 .game-bid-tiger {
     width: 20rem;
     height: 10rem;
-    border: 2px solid black ;
+    border: 2px solid #2b542a;
     cursor: pointer;
     border-radius: 10px;
-
+    box-shadow: inset #071f06 -3px -3px 20px 0px;
+    background: #144712;
 }
-.text-bet {
-    font-size: 1.2em;
-    font-weight: 500;
-    color: #e8b404;
+.game-bid-tiger .test {
+    display: inline-block;
+    
 }
 
 .game-chips {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // gap: 1rem;
+    // margin-top: 2rem;
 }
-
-.active {
-    background-color: rgb(255, 245, 232);
-    opacity: 0.5;
+.stack-bet:nth-child(2n+1) {
+    margin-left: 10px;
 }
 
 .game-bid-dragon-side {
@@ -122,7 +115,7 @@ box-shadow: 1px -5px 10px 7px rgba(34, 60, 80, 0.32) inset;
     align-items: center;
     flex-direction: column;
     gap: 1rem;
-    max-width: 20rem
+    max-width: 21rem
 }
 .game-bid-dragon-side-wrapper {
     display: flex;
@@ -137,7 +130,7 @@ box-shadow: 1px -5px 10px 7px rgba(34, 60, 80, 0.32) inset;
     align-items: center;
     flex-direction: column;
     gap: 1rem;
-    max-width: 20rem
+    max-width: 21rem
 }
 .game-bid-tiger-side-wrapper {
     display: flex;
@@ -149,30 +142,64 @@ box-shadow: 1px -5px 10px 7px rgba(34, 60, 80, 0.32) inset;
 .game-bid-size {
     width: 5rem;
     height: 5rem;
-    border: 2px solid black ;
+    border: 2px solid #2b542a;
     cursor: pointer;
     border-radius: 10px;
 }
 .game-bid-big  {
-    font-size: 0.8em;
+    font-size: 1em;
     width: 7.5rem;
     color: #e8b404;
+    box-shadow: inset #071f06 -3px -3px 20px 0px;
+    background: #144712;
 }
 .game-bid-small {
-    font-size: 0.8em;
+    font-size: 1em;
     width: 7.5rem;
     color: #e8b404;
+    box-shadow: inset #071f06 -3px -3px 20px 0px;
+    background: #144712;
 }
-
 .game-bid-clubs {
-    background-image: url(../../assets/img/club.png);
+    box-shadow: inset #071f06 -3px -3px 20px 0px;
+    background: #144712;
+    background-image: url(../../assets/img/clubSVG.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
 }
 .game-bid-diamonds {
-    background-image: url(../../assets/img/diamonds.png);
+    box-shadow: inset #071f06 -3px -3px 20px 0px;
+    background: #144712;
+    background-image: url(../../assets/img/diamondsSVG.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
 }
 .game-bid-hearts  {
-    background-image: url(../../assets/img/heart.png);
+    box-shadow: inset #071f06 -3px -3px 20px 0px;
+    background: #144712;
+    background-image: url(../../assets/img/heartSVG.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
 }
 .game-bid-spades{
-    background-image: url(../../assets/img/spade.png);
+    box-shadow: inset #071f06 -3px -3px 20px 0px;
+    background: #144712;
+    background-image: url(../../assets/img/spadeSVG.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+.player-balance {
+    color: white;
+    position: absolute;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    font-size: 1em;
+    left: 1%;
+    top: 94%;
+    font-weight: 500;
 }

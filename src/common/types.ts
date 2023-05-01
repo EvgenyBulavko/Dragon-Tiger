@@ -1,9 +1,8 @@
-import { cardSuits, cardValues, betsValue, cardDT } from './allData';
+import { cardSuits, cardValues, betsValue } from './allData';
 
 export type CardSuit = typeof cardSuits[number];
 export type CardValue = typeof cardValues[number];
 export type BetsValue = typeof betsValue[number];
-export type DTValue = typeof cardDT[number];
 
 export interface TypeCard {
     suit: CardSuit;
@@ -11,6 +10,7 @@ export interface TypeCard {
     x: number;
     y: number;
     onClick?: () => void;
+    isFirst?:boolean;
 }
 
 export interface PlayingCard {
@@ -18,13 +18,15 @@ export interface PlayingCard {
   value: CardValue | 'backward';
 }
 
-export interface PlayingCard1 {
+export interface TCard {
   suit: CardSuit;
-  value: DTValue;
+  value: CardValue;
 }
 
-export interface BetsList {
-  "tiger": number,
-  "dragon": number,
-  "tie": number
+export type BetsList = { [K in BetsValue]: number }
+
+export interface PropsChip {
+  id: string;
+  isBet: boolean;
+  betValue?: string;
 }

@@ -1,117 +1,178 @@
-import React, { EventHandler, MouseEventHandler, useState } from "react";
+import React, {
+  EventHandler,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from "react";
 import "./Game.scss";
 import { СardDistribution } from "../../components/СardВistribution";
 import { Chips } from "../../components/Chips";
 import { observer } from "mobx-react";
 import { useGameStore } from "../../store/gameStore";
-import DragonImg from '../../assets/img/dracon.jpg';
+import DragonImg from "../../assets/img/dracon.jpg";
+import { Chip } from "../../components/Chip";
+import { DragonСell } from "../../components/DragonСell";
+import { betsValue } from "../../common/allData";
 
 export const Game = observer(() => {
   const [win, setWin] = useState("");
   const [active, setActive] = useState("");
   const { selectBet, selectedBet, playerBalance, bets } = useGameStore();
-  /*  const handleClick = () => {
-    console.log("The link was clicked.");
-    Math.floor(Math.random() * 101) > 50
-      ? setWin("win tiger")
-      : setWin("win dragon");
-  }; */
-
-  const handleClickDragon = () => {
-    setActive("dragon");
-    selectBet("dragon");
-  };
-  const handleClickTie = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    setActive("tie");
-    selectBet("tie");
-  };
-  const handleClickTiger = () => {
-    setActive("tiger");
-  };
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (
-      e.currentTarget.id === "tiger" ||
-      e.currentTarget.id === "dragon" ||
-      e.currentTarget.id === "tie"
-    ) {
+    if (betsValue.includes(e.currentTarget.id)) {
       selectBet(e.currentTarget.id);
     }
   };
 
   return (
     <div className="game">
+      <div className="player-balance">{playerBalance}$</div>
       <div className="game-body">
         <div className="game-body-wrapper-border-external">
           <div className="game-body-wrapper">
             <div className="game-body-wrapper-border">
               <div className="game_container">
-                <div>{playerBalance}$</div>
                 <СardDistribution />
               </div>
               <div className="game-bid">
                 <div className="game-bid-dragon-side">
                   <div className="game-bid-dragon-side-wrapper">
-                    <div className="game-bid-spades game-bid-size"></div>
-                    <div className="game-bid-hearts game-bid-size"></div>
-                    <div className="game-bid-big game-bid-size">
-                      BIG <br />8 - K
+                    <div onClick={handleClick} id="dragon_spades">
+                      <DragonСell
+                        bet={bets.dragon_spades}
+                        selectedBet={selectedBet}
+                        className="game-bid-spades game-bid-size"
+                        id="dragon_spades"
+                      />
                     </div>
-                    <div className="game-bid-diamonds game-bid-size"></div>
-                    <div className="game-bid-clubs game-bid-size"></div>
-                    <div className="game-bid-small game-bid-size">
-                      SMALL <br />A - 6
+                    <div onClick={handleClick} id="dragon_hearts">
+                      <DragonСell
+                        bet={bets.dragon_hearts}
+                        selectedBet={selectedBet}
+                        className="game-bid-hearts game-bid-size"
+                        id="dragon_hearts"
+                      />
+                    </div>
+                    <div onClick={handleClick} id="dragon_big">
+                      <DragonСell
+                        bet={bets.dragon_big}
+                        selectedBet={selectedBet}
+                        className="game-bid-big game-bid-size"
+                        textBody={["BIG", <br/>,  "8 - K"]}
+                        id="dragon_big"
+                      />
+                    </div>
+                    <div onClick={handleClick} id="dragon_diamonds">
+                      <DragonСell
+                        bet={bets.dragon_diamonds}
+                        selectedBet={selectedBet}
+                        className="game-bid-diamonds game-bid-size"
+                        id="dragon_diamonds"
+                      />
+                    </div>
+                    <div onClick={handleClick} id="dragon_clubs">
+                      <DragonСell
+                        bet={bets.dragon_clubs}
+                        selectedBet={selectedBet}
+                        className="game-bid-clubs game-bid-size"
+                        id="dragon_clubs"
+                      />
+                    </div>
+                    <div onClick={handleClick} id="dragon_small">
+                      <DragonСell
+                        bet={bets.dragon_small}
+                        selectedBet={selectedBet}
+                        className="game-bid-small game-bid-size"
+                        textBody={["SMALL", <br/>,  "A - 6"]}
+                        id="dragon_small"
+                      />
                     </div>
                   </div>
-                  <div
-                    onClick={handleClick}
-                    id="dragon"
-                    className={
-                      "dragon" === selectedBet
-                        ? "game-bid-dragon active"
-                        : "game-bid-dragon"
-                    }
-                  >
-                    <span className="text-bet">DRAGON</span>
-                    {bets.dragon > 0 && <h3>{bets.dragon}</h3>}
+                  <div onClick={handleClick} id="dragon">
+                    <DragonСell
+                      bet={bets.dragon}
+                      selectedBet={selectedBet}
+                      className="game-bid-dragon"
+                      textBody={["DRAGON", <br/>,  "龍"]}
+                      id="dragon"
+                    />
                   </div>
                 </div>
-                <div
-                  onClick={handleClick}
-                  className={
-                    "tie" === selectedBet
-                      ? "game-bid-tie active"
-                      : "game-bid-tie"
-                  }
-                  id="tie"
-                >
-                  <span className="text-bet">TIE <br/> 8 : 1</span>
-                  {bets.tie > 0 && <h3>{bets.tie}</h3>}
-                </div>
+                <div onClick={handleClick} id="tie">
+                    <DragonСell
+                      bet={bets.tie}
+                      selectedBet={selectedBet}
+                      className="game-bid-tie"
+                      textBody={["TIE", <br/>,  "8 : 1"]}
+                      id="tie"
+                    />
+                  </div>
+                
                 <div className="game-bid-tiger-side">
                   <div className="game-bid-tiger-side-wrapper">
-                    <div className="game-bid-big game-bid-size">
-                      BIG <br />8 - K
+                    <div onClick={handleClick} id="tiger_big">
+                      <DragonСell
+                        bet={bets.tiger_big}
+                        selectedBet={selectedBet}
+                        className="game-bid-big game-bid-size"
+                        textBody={["BIG", <br/>,  "8 - K"]}
+                        id="tiger_big"
+                      />
                     </div>
-                    <div className="game-bid-spades game-bid-size"></div>
-                    <div className="game-bid-hearts game-bid-size"></div>
-                    <div className="game-bid-small game-bid-size">
-                      SMALL <br />A - 6
+                    <div onClick={handleClick} id="tiger_spades">
+                      <DragonСell
+                        bet={bets.tiger_spades}
+                        selectedBet={selectedBet}
+                        className="game-bid-spades game-bid-size"
+                        id="tiger_spades"
+                      />
                     </div>
-                    <div className="game-bid-diamonds game-bid-size"></div>
-                    <div className="game-bid-clubs game-bid-size"></div>
+                    <div onClick={handleClick} id="tiger_hearts">
+                      <DragonСell
+                        bet={bets.tiger_hearts}
+                        selectedBet={selectedBet}
+                        className="game-bid-hearts game-bid-size"
+                        id="tiger_hearts"
+                      />
+                    </div>
+                    <div onClick={handleClick} id="tiger_small">
+                      <DragonСell
+                        bet={bets.tiger_small}
+                        selectedBet={selectedBet}
+                        className="game-bid-small game-bid-size"
+                        textBody={["SMALL", <br/>,  "A - 6"]}
+                        id="tiger_small"
+                      />
+                    </div>
+
+                    <div onClick={handleClick} id="tiger_diamonds">
+                      <DragonСell
+                        bet={bets.tiger_diamonds}
+                        selectedBet={selectedBet}
+                        className="game-bid-diamonds game-bid-size"
+                        id="tiger_diamonds"
+                      />
+                    </div>
+                    <div onClick={handleClick} id="tiger_clubs">
+                      <DragonСell
+                        bet={bets.tiger_clubs}
+                        selectedBet={selectedBet}
+                        className="game-bid-clubs game-bid-size"
+                        id="tiger_clubs"
+                      />
+                    </div>
                   </div>
-                  <div
-                    onClick={handleClick}
-                    className={
-                      "game-bid-tiger" +
-                      ("tiger" === selectedBet ? " active" : "")
-                    }
-                    id="tiger"
-                  >
-                    <span className="text-bet">TIGER</span>
-                    {bets.tiger > 0 && <h3>{bets.tiger}</h3>}
+                  <div onClick={handleClick} id="tiger">
+                    <DragonСell
+                      bet={bets.tiger}
+                      selectedBet={selectedBet}
+                      className="game-bid-tiger"
+                      textBody={["TIGER", <br/>,"虎"]}
+                      id="tiger"
+                    />
                   </div>
+                  
                 </div>
               </div>
               <div className="game-chips">

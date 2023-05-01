@@ -1,17 +1,29 @@
-import { action, makeAutoObservable } from "mobx";
-import { BetsList, BetsValue, PlayingCard, PlayingCard1 } from "../common/types";
+import { action, computed, makeAutoObservable } from "mobx";
+import { BetsList, BetsValue, PlayingCard, TCard } from "../common/types";
 import { createDeck } from "./utils";
 import React from "react";
-import { cardDT, cardSuits, cardValues } from "../common/allData";
+import { cardSuits, cardValues } from "../common/allData";
 
 export class GameStore {
   playerBalance: number = 700;
-  deck: PlayingCard1[];
-  openCards: PlayingCard1[] = [];
+  deck: TCard[];
+  openCards: TCard[] = [];
   bets: BetsList = {
     dragon: 0,
     tiger: 0,
     tie: 0,
+    dragon_spades: 0,
+    dragon_hearts: 0,
+    dragon_big: 0,
+    dragon_diamonds: 0,
+    dragon_clubs: 0,
+    dragon_small: 0,
+    tiger_big: 0,
+    tiger_hearts: 0,
+    tiger_diamonds: 0,
+    tiger_clubs: 0,
+    tiger_spades: 0,
+    tiger_small: 0,
   };
   selectedBet: BetsValue | null = null;
   prevCard: PlayingCard | null = null;
@@ -27,10 +39,16 @@ export class GameStore {
       checkWin: action.bound,
       selectBet: action.bound,
       makeBet: action.bound,
+      removeBet: action.bound,
      clearBets: action.bound,
+     openCardsLength: computed,
       // changeBankerMinScore: action.bound,
     });
     //autoSaveKeys(this, 'game', ['playerMinScore', 'bankerMinScore']);
+  }
+
+  get openCardsLength(){
+    return this.openCards.length;
   }
 
   openNextCards() {
@@ -61,6 +79,12 @@ export class GameStore {
     }
     
   }
+  removeBet(value: number, betValue: string | undefined) {
+    if (betValue === this.selectedBet) {
+      this.bets[betValue] -= value;
+      this.playerBalance += value;
+    }
+  }
 
   checkWin() {
     // console.log(this.openCards[0].value, this.openCards[1].value,this.bets);
@@ -68,27 +92,125 @@ export class GameStore {
     // console.log(this.bets.tiger);
     if (this.openCards.length) {
       if (
-        cardDT.indexOf(this.openCards[0].value) === cardDT.indexOf(this.openCards[1].value) &&
+        cardValues.indexOf(this.openCards[0].value) === cardValues.indexOf(this.openCards[1].value) &&
         this.bets.tie > 0
       ) {
-        this.playerBalance += this.bets.tie * 11;
+        this.playerBalance += this.bets.tie * 8;
       }
       if (
-        cardDT.indexOf(this.openCards[0].value) > cardDT.indexOf(this.openCards[1].value) &&
+        cardValues.indexOf(this.openCards[0].value) > cardValues.indexOf(this.openCards[1].value) &&
         this.bets.dragon > 0
       ) {
         this.playerBalance += this.bets.dragon * 2;
       }
       if (
-        cardDT.indexOf(this.openCards[0].value) < cardDT.indexOf(this.openCards[1].value) &&
+        cardValues.indexOf(this.openCards[0].value) < cardValues.indexOf(this.openCards[1].value) &&
         this.bets.tiger > 0
       ) {
-        console.log(1)
         this.playerBalance += this.bets.tiger * 2;
       }
+
+      if (
+        this.openCards[1].suit === 'clubs' &&
+        this.bets.tiger_clubs > 0
+      ) {
+        this.playerBalance += this.bets.tiger_clubs * 2;
+      }
+      if (
+        this.openCards[1].suit === 'diamonds' &&
+        this.bets.tiger_diamonds > 0
+      ) {
+        this.playerBalance += this.bets.tiger_diamonds * 2;
+      }
+      if (
+        this.openCards[1].suit === 'hearts' &&
+        this.bets.tiger_hearts > 0
+      ) {
+        this.playerBalance += this.bets.tiger_hearts * 2;
+      }
+      if (
+        this.openCards[1].suit === 'spades' &&
+        this.bets.tiger_spades > 0
+      ) {
+        this.playerBalance += this.bets.tiger_spades * 2;
+      }
+
+      if (
+        cardValues.indexOf(this.openCards[1].value) < 6 &&
+        this.bets.tiger_small > 0
+      ) {
+        this.playerBalance += this.bets.tiger_small * 2;
+      }
+
+      if (
+        cardValues.indexOf(this.openCards[1].value) > 5 &&
+        this.bets.tiger_big > 0
+      ) {
+        this.playerBalance += this.bets.tiger_big * 2;
+      }
+
+
+      if (
+        this.openCards[0].suit === 'clubs' &&
+        this.bets.dragon_clubs > 0
+      ) {
+        this.playerBalance += this.bets.dragon_clubs * 2;
+      }
+      if (
+        this.openCards[0].suit === 'diamonds' &&
+        this.bets.dragon_diamonds > 0
+      ) {
+        this.playerBalance += this.bets.dragon_diamonds * 2;
+      }
+      if (
+        this.openCards[0].suit === 'hearts' &&
+        this.bets.dragon_hearts > 0
+      ) {
+        this.playerBalance += this.bets.dragon_hearts * 2;
+      }
+      if (
+        this.openCards[0].suit === 'spades' &&
+        this.bets.dragon_spades > 0
+      ) {
+        this.playerBalance += this.bets.dragon_spades * 2;
+      }
+
+      if (
+        cardValues.indexOf(this.openCards[0].value) < 6 &&
+        this.bets.dragon_small > 0
+      ) {
+        this.playerBalance += this.bets.dragon_small * 2;
+      }
+
+      if (
+        cardValues.indexOf(this.openCards[0].value) > 5 &&
+        this.bets.dragon_big > 0
+      ) {
+        this.playerBalance += this.bets.dragon_big * 2;
+      }
+
+
+
+
+
       this.bets.tiger = 0;
       this.bets.tie = 0;
       this.bets.dragon = 0;
+
+      this.bets.dragon_big = 0;
+      this.bets.dragon_clubs = 0;
+      this.bets.dragon_diamonds = 0;
+      this.bets.dragon_hearts = 0;
+      this.bets.dragon_small = 0;
+      this.bets.dragon_spades = 0;
+
+      this.bets.tiger_big = 0;
+      this.bets.tiger_clubs = 0;
+      this.bets.tiger_diamonds = 0;
+      this.bets.tiger_hearts = 0;
+      this.bets.tiger_small = 0;
+      this.bets.tiger_spades = 0;
+
     }
   }
 
