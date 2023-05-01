@@ -4,11 +4,14 @@ import chip10 from "../../assets/img/chips/chip10.png";
 import chip25 from "../../assets/img/chips/chip25.png";
 import chip50 from "../../assets/img/chips/chip50.png";
 import chip100 from "../../assets/img/chips/chip100.png";
+import addChip from "../../assets/mp3/addChip.wav";
+import removeChip from "../../assets/mp3/removeChip.flac";
 
 import { observer } from "mobx-react";
 import { useGameStore } from "../../store/gameStore";
 import "./Chip.scss";
 import { PropsChip } from "../../common/types";
+import useSound from "use-sound";
 
 export const Chip = observer((props: PropsChip) => {
   const { makeBet, removeBet } = useGameStore();
@@ -17,6 +20,10 @@ export const Chip = observer((props: PropsChip) => {
   const imgChipComp = () => {
     return <img src={imgChip} alt="chip" className="game-chip-img" />;
   };
+  const [playSoundAddChip] = useSound(addChip);
+  const [playSoundRemoveChip] = useSound(removeChip);
+
+  const { selectedBet } = useGameStore();
 
   useEffect(() => {
     switch (props.id) {
@@ -39,9 +46,13 @@ export const Chip = observer((props: PropsChip) => {
 
   const makeNewBet = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!props.isBet) {
+      playSoundAddChip();
       makeBet(+e.currentTarget.id);
     } else {
+      if (props.betValue === selectedBet) {
+      playSoundRemoveChip();
       removeBet(+e.currentTarget.id, props.betValue);
+      }
     }
   };
   return (

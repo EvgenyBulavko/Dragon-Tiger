@@ -10,7 +10,7 @@ import * as PIXI from "pixi.js";
 import "./Card.scss";
 import { Sprite, useTick } from "@pixi/react";
 
-export const Card = ({ suit, value, x, y, onClick, isFirst }: TypeCard) => {
+export const Card = ({ suit, value, x, y, onClickCard, isMove, speed, index, cursor='default' }: TypeCard) => {
   const { leftCoordinate, topCoordinate } = getCardSpriteCoordinates({
     suit,
     value,
@@ -21,57 +21,50 @@ export const Card = ({ suit, value, x, y, onClick, isFirst }: TypeCard) => {
   const [yCard, setYCard] = useState(y);
   const [isFlip, setIsFlip] = useState(false);
   const [ticker, setTicker] = useState<PIXI.Ticker | null>(null);
-  // const [texture, setTexture] = useState<any>(PIXI.Texture.from(CardS, { resourceOptions: 1 }));
+
   const flip = (ticker: PIXI.Ticker) => {
     if(isFlip){
       setWidth((prev) => {
         const newW = prev + 25;
-        if(newW > 100) ticker.stop();
         return newW;
       })
       setXCard(prev => prev - 12.5)
+      if(width >= 100) ticker.stop();
     } 
     else {
       
       setWidth((prev) => {
         const newW = prev - 25;
-        
-        if(newW <= 0) setIsFlip(true);
         return newW;
       });
+      if(width <= 0) setIsFlip(true);
       setXCard(prev => prev + 12.5)
     }
   };
+
   useTick((delta, ticker) => {
     setTicker(ticker);
 
-    if (!isFirst && yCard < 150) {
-      setXCard((prev) => prev - 16);
-      setYCard((prev) => prev + 10);
-    }
-
-    if (isFirst && yCard < 150) {
-      setXCard((prev) => prev - 44);
-      setYCard((prev) => prev + 10);
+    if (yCard < 150 && speed) {
+      setXCard((prev) => prev + speed.x);
+      setYCard((prev) => prev + speed.y);
     }
 
     if (yCard >= 150) {
       flip(ticker);
       
     }
-  }, isFirst !== undefined);
+  }, isMove !== undefined);
 
   useEffect(() => {
-    // console.log(isFirst, ticker);
-    if (isFirst !== undefined && ticker) {
+    if (isMove !== undefined && ticker) {
       setXCard(x);
       setYCard(y);
       setWidth(100);
       setIsFlip(false);
-      // console.log("+");
       ticker.start();
     }
-  }, [isFirst, suit, value]);
+  }, [isMove, suit, value, index]);
 
   const SpriteCard = () => {
     let textureBase = PIXI.BaseTexture.from(CardS);
@@ -79,7 +72,7 @@ export const Card = ({ suit, value, x, y, onClick, isFirst }: TypeCard) => {
       textureBase,
       new PIXI.Rectangle(leftCoordinate, topCoordinate, 334, 440)
     );
-    if (value === "backward" || (isFirst !== undefined && isFlip === false)) {
+    if (value === "backward" || (isMove !== undefined && isFlip === false)) {
       textureBase = PIXI.BaseTexture.from(Back);
       texture = new PIXI.Texture(
         textureBase,
@@ -95,9 +88,10 @@ export const Card = ({ suit, value, x, y, onClick, isFirst }: TypeCard) => {
         width={width}
         height={140}
         interactive={true}
+        cursor={cursor}
         pointerdown={() => {
-          if (onClick) {
-            onClick();
+          if (onClickCard) {
+            onClickCard();
           }
         }}
       />

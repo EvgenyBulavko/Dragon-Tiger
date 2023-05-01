@@ -13,18 +13,16 @@ The aim of Dragon Tiger is to predict which of the hands - Dragon or Tiger - wil
 - The highest card wins and pays even money 1:1
 - Card value from the lowest to the highest is as follows: A,2,3,4,5,6,7,8,9,10,J,Q,K
 - In the case of a Tie, half your main bet (the Dragon/Tiger bet) is returned and Tie bet pays 11:1
-- If cards for the Dragon and Tiger are equal both in value and suit, its a Suited Tie, and half your main bet (the Dragon/Tiger bet) is returned and Suited Tie bet pays 50:1
+- If cards for the Dragon and Tiger are equal both in value and suit, its a Suited Tie, and half your main bet (the Dragon/Tiger bet) is returned and Suited Tie bet pays 8:1
 
 ## Payouts
 
 - Dragon: 1:1
 - Tiger 1:1
-- Tie 11:1
-- Suited Tie: 50:1
+- Tie 8:1
 
 ## Return to Player
 
 The optimal theoretical return to player percentages:
 - Main bet (Dragon or Tiger): 96.27%
 - Tie: 89.64%
-- Suited Tie: 86.02%.

@@ -1,4 +1,4 @@
-export const cardSuits = ["diamonds", "clubs", "hearts", "spades"] as const;
+export const cardSuits = ["spades", "clubs", "diamonds", "hearts"] as const;
 export const cardValues = [
   "A",
   "2",
@@ -26,10 +26,10 @@ export const betsValue = [
   "dragon_clubs",
   "dragon_small",
   "tiger_big",
+  "tiger_spades",
   "tiger_hearts",
+  "tiger_small",
   "tiger_diamonds",
   "tiger_clubs",
-  "tiger_spades",
-  "tiger_small",
 ];
 

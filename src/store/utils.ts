@@ -14,11 +14,15 @@ const createShuffledCards = (deck: Array<TCard>) => {
 
 export const createDeck = () => {
   let deck: Array<TCard> = [];
-  while (deck.length < 52*8) {
+  let i = 0;
+  while (deck.length < 52 * 8) {
     deck = [
       ...deck,
       ...cardSuits.flatMap((suit) =>
-        cardValues.map((value) => ({ suit, value }))
+        cardValues.map((value) => {
+          i++;
+          return { suit, value, id: i };
+        })
       ),
     ];
   }

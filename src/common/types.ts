@@ -9,8 +9,11 @@ export interface TypeCard {
     value: CardValue | 'backward';
     x: number;
     y: number;
-    onClick?: () => void;
-    isFirst?:boolean;
+    onClickCard?: () => void;
+    index?: number
+    isMove?:boolean;
+    speed?: {x: number, y: number};
+    cursor?: string
 }
 
 export interface PlayingCard {
@@ -21,6 +24,7 @@ export interface PlayingCard {
 export interface TCard {
   suit: CardSuit;
   value: CardValue;
+  id: number;
 }
 
 export type BetsList = { [K in BetsValue]: number }
