@@ -1,0 +1,9 @@
+.game-chip-img {
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    filter: drop-shadow(3px 4px 4px rgb(6, 6, 6));
+}
+.game-chip-img:hover {
+    filter: drop-shadow(4px 7px 8px rgb(253, 253, 253));
+}
