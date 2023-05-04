@@ -14,7 +14,7 @@ import { PropsChip } from "../../common/types";
 import useSound from "use-sound";
 
 export const Chip = observer((props: PropsChip) => {
-  const { makeBet, removeBet } = useGameStore();
+  const { makeBet, removeBet, isVolume } = useGameStore();
   const id = props.id;
   const [imgChip, setImgChip] = useState(chip5);
   const imgChipComp = () => {
@@ -46,11 +46,11 @@ export const Chip = observer((props: PropsChip) => {
 
   const makeNewBet = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!props.isBet) {
-      playSoundAddChip();
+      if(isVolume) playSoundAddChip();
       makeBet(+e.currentTarget.id);
     } else {
       if (props.betValue === selectedBet) {
-      playSoundRemoveChip();
+      if(isVolume) playSoundRemoveChip();
       removeBet(+e.currentTarget.id, props.betValue);
       }
     }

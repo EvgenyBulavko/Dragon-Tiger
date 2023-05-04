@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as PIXI from "pixi.js";
 import { Container, Stage } from "@pixi/react";
 import {
@@ -13,11 +13,11 @@ import soundSell from "../../assets/mp3/dealCard.wav";
 import useSound from "use-sound";
 
 export const СardDistribution = observer(() => {
-  const { prevCard, openCards, openNextCards, checkWin , openCardsLength} =
+  const { prevCard, openCards, openNextCards, checkWin , openCardsLength, isVolume} =
     useGameStore();
   const [playSound] = useSound(soundSell);
   const onClickCard = () => {
-    playSound();
+    if(isVolume) playSound();
     openNextCards();
     checkWin();
   };

@@ -1,41 +1,35 @@
-import React, {
-  EventHandler,
-  MouseEventHandler,
-  useEffect,
-  useState,
-} from "react";
+import React from "react";
 import "./Game.scss";
 import { СardDistribution } from "../../components/СardВistribution";
 import { Chips } from "../../components/Chips";
 import { observer } from "mobx-react";
 import { useGameStore } from "../../store/gameStore";
-import DragonImg from "../../assets/img/dracon.jpg";
-import { Chip } from "../../components/Chip";
 import { DragonСell } from "../../components/DragonСell";
 import { betsValue } from "../../common/allData";
 import useSound from "use-sound";
 import soundSelected from "../../assets/mp3/selected.wav";
-import ReactApexChart from "react-apexcharts";
+import { Settings } from "../../components/Settings";
+import { Options } from "../../components/Options";
 
 export const Game = observer(() => {
-  const [win, setWin] = useState("");
-  const { selectBet, selectedBet, playerBalance, bets, playerBet, playerWin } =
+  const { selectBet,selectOption, selectedBet, playerBalance, bets, playerBet, playerWin, isVolume,isOptions } =
     useGameStore();
   const [playSound] = useSound(soundSelected);
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (betsValue.includes(e.currentTarget.id)) {
-      if (selectedBet !== e.currentTarget.id) {
+      if (selectedBet !== e.currentTarget.id && isVolume) {
         playSound();
       }
-      console.log(e.currentTarget.id);
       selectBet(e.currentTarget.id);
     }
   };
+  const onClose = () => selectOption()
 
   return (
     <div className="game">
       <div className="player-balance">
-        BALANCE <br /> {playerBalance}€
+        <div></div>
+        <div className={"player-balance-text"}> BALANCE <br /> {playerBalance}€</div>
       </div>
 
       <div className="game-body">
@@ -187,29 +181,33 @@ export const Game = observer(() => {
               <div className="game-chips">
                 <Chips />
               </div>
-              {win}
             </div>
           </div>
         </div>
       </div>
+
       <div className="player-balance">
-        <div className="player-balance-win">
-          <div className={"player-balance-win-text"}>BET</div>
-          <div className={"player-balance-win-text"}>{playerBet}€</div>
-        </div>
-        <div className="player-balance-win">
-          <div className={"player-balance-win-text"}>WIN</div>
-          <div
-            className={
-              playerWin > 0
-                ? "player-balance-win-text activeWin"
-                : "player-balance-win-text "
-            }
-          >
-            {playerWin}€
+        <Settings />
+        <div className="player-balance-wrapper">
+          <div className="player-balance-win">
+            <div className={"player-balance-win-text"}>BET</div>
+            <div className={"player-balance-win-text"}>{playerBet}€</div>
+          </div>
+          <div className="player-balance-win">
+            <div className={"player-balance-win-text"}>WIN</div>
+            <div
+              className={
+                playerWin > 0
+                  ? "player-balance-win-text activeWin"
+                  : "player-balance-win-text "
+              }
+            >
+              {playerWin}€
+            </div>
           </div>
         </div>
       </div>
+     <Options visible={isOptions} onClose={onClose}/>
     </div>
   );
 });
