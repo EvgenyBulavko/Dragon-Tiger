@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { PlayingCard, TypeCard } from "../../common/types";
+import { TypeCard } from "../../common/types";
 import { getCardSpriteCoordinates } from "./utility";
-import CardSprite from "../../assets/img/cards.svg";
 import CardS from "../../assets/img/cards.png";
 import Back from "../../assets/img/back.png";
-import BackwardIcon from "../../assets/img/backward.svg";
 import * as PIXI from "pixi.js";
+import { Sprite, useTick } from "@pixi/react";
 
 import "./Card.scss";
-import { Sprite, useTick } from "@pixi/react";
 
 export const Card = ({ suit, value, x, y, onClickCard, isMove, speed, index, cursor='default' }: TypeCard) => {
   const { leftCoordinate, topCoordinate } = getCardSpriteCoordinates({
