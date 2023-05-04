@@ -1,1 +1,0 @@
-export { СardDistribution } from './СardDistribution';
