@@ -1,0 +1,1 @@
+export { СardDistribution } from './СardDistribution';

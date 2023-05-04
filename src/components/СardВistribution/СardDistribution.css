@@ -1,0 +1,24 @@
+.stage {
+    width: 800px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+.stage::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -63%;
+    background: url(../../assets/img/dragonTiger.png);
+    transform: rotate(273deg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 25%;
+    z-index: 1;
+  }
+  .stage-wrapper{
+    position: fixed;
+    z-index: 2;
+  }
