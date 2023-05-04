@@ -1,13 +1,10 @@
-import React, { ReactElement, useState } from "react";
+import React from "react";
 import { observer } from "mobx-react";
-import "./Options.scss";
 import { useGameStore } from "../../store/gameStore";
 import { HelpInfo } from "../HelpInfo";
+import { ModalProps } from "../../common/types";
 
-interface ModalProps {
-  visible: boolean;
-  onClose: () => void;
-}
+import "./Options.scss";
 
 export const Options = observer(({ visible = false, onClose }: ModalProps) => {
   const { onResetBalance,selectHelp, isHelp } = useGameStore();

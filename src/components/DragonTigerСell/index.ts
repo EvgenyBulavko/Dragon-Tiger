@@ -1,0 +1,1 @@
+export { DragonTigerСell } from './DragonTigerСell';

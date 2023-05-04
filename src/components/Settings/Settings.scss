@@ -6,6 +6,7 @@
     background-color: black;
     cursor: pointer;
 }
+
 .active-volume {
     box-shadow: inset #071f06 -3px -3px 20px 0px;
     background: #144712;
@@ -14,7 +15,8 @@
     background-repeat: no-repeat;
     background-size: 70%;
 }
-.no-active-volume { 
+
+.no-active-volume {
     box-shadow: inset #071f06 -3px -3px 20px 0px;
     background: #144712;
     background-image: url(../../assets/img/off.png);
@@ -22,7 +24,8 @@
     background-repeat: no-repeat;
     background-size: 70%;
 }
-.settings-menu { 
+
+.settings-menu {
     box-shadow: inset #071f06 -3px -3px 20px 0px;
     background: #144712;
     background-image: url(../../assets/img/menu.png);
@@ -30,6 +33,7 @@
     background-repeat: no-repeat;
     background-size: 70%;
 }
+
 .settings {
     display: flex;
     gap: 1rem;

@@ -2,7 +2,7 @@ import { action, computed, makeAutoObservable } from "mobx";
 import { BetsList, BetsValue, PlayingCard, TCard } from "../common/types";
 import { createDeck } from "./utils";
 import React from "react";
-import { cardSuits, cardValues } from "../common/allData";
+import { cardValues } from "../common/allData";
 import { autoSaveStore } from "./autoSave";
 
 export class GameStore {
@@ -31,12 +31,9 @@ export class GameStore {
     tiger_spades: 0,
     tiger_small: 0,
   };
+
   selectedBet: BetsValue | null = null;
   prevCard: PlayingCard[] = [];
-  // bankerScore: number | null = null;
-  // isGame: boolean = false;
-  // playerMinScore: MinScore = minScoreForStart;
-  // bankerMinScore: MinScore = minScoreForStart;
 
   constructor() {
     this.deck = createDeck();
@@ -54,11 +51,8 @@ export class GameStore {
       selectHelp: action.bound,
       countWin: action.bound,
       onResetBalance: action.bound,
-
-      // changeBankerMinScore: action.bound,
     });
     autoSaveStore(this, "playerBalance");
-    //autoSaveKeys(this, 'game', ['playerMinScore', 'bankerMinScore']);
   }
 
   get openCardsLength() {
@@ -90,14 +84,11 @@ export class GameStore {
       this.openCards = [];
       this.openCards.push(this.deck.pop()!);
       this.openCards.push(this.deck.pop()!);
-      console.log("new", this.openCards[0].value + this.openCards[0].suit);
-      console.log("new", this.openCards[1].value + this.openCards[1].suit);
     } else {
       this.openCards = [];
       this.prevCard = [];
       this.deck = createDeck();
     }
-    console.log(this.bets);
   }
 
   selectBet(newBet: BetsValue) {
@@ -111,6 +102,7 @@ export class GameStore {
       this.playerBet += value;
     }
   }
+
   removeBet(value: number, betValue: string | undefined) {
     if (betValue === this.selectedBet) {
       this.bets[betValue] -= value;
@@ -120,14 +112,8 @@ export class GameStore {
   }
 
   checkWin() {
-    // console.log(this.openCards[0].value, this.openCards[1].value,this.bets);
-    // console.log(this.openCards.length);
-    // console.log(this.bets.tiger);
-    console.log(this.openCards[0].suit);
-    console.log(this.openCards[1].suit);
     if (this.openCards.length) {
       this.countWin();
-
       this.clearBets();
     }
   }

@@ -2,9 +2,11 @@
     display: flex;
     justify-content: space-between;
 }
+
 .info-big-text {
     margin: 0.2rem;
 }
+
 .info-clubs {
     width: 1rem;
     height: 1rem;
@@ -13,6 +15,7 @@
     background-repeat: no-repeat;
     background-size: 70%;
 }
+
 .info-diamonds {
     width: 1rem;
     height: 1rem;
@@ -21,7 +24,8 @@
     background-repeat: no-repeat;
     background-size: 70%;
 }
-.info-hearts  {
+
+.info-hearts {
     width: 1rem;
     height: 1rem;
     background-image: url(../../assets/img/heartSVG.svg);
@@ -29,6 +33,7 @@
     background-repeat: no-repeat;
     background-size: 70%;
 }
+
 .info-spades {
     width: 1rem;
     height: 1rem;
@@ -37,6 +42,7 @@
     background-repeat: no-repeat;
     background-size: 70%;
 }
+
 .info-icons {
     display: flex;
 }

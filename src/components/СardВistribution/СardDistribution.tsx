@@ -8,11 +8,13 @@ import {
 } from "../../store/gameStore";
 import { Card } from "../Card";
 import { observer } from "mobx-react";
-import "./СardDistribution.css";
 import soundSell from "../../assets/mp3/dealCard.wav";
 import useSound from "use-sound";
 
+import "./СardDistribution.css";
+
 export const СardDistribution = observer(() => {
+  
   const { prevCard, openCards, openNextCards, checkWin , openCardsLength, isVolume} =
     useGameStore();
   const [playSound] = useSound(soundSell);
@@ -21,6 +23,7 @@ export const СardDistribution = observer(() => {
     openNextCards();
     checkWin();
   };
+
   return (
     <div className="stage">
       <div className="stage-wrapper">

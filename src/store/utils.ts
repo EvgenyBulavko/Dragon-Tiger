@@ -26,7 +26,6 @@ export const createDeck = () => {
       ),
     ];
   }
-  console.log(deck);
 
   return createShuffledCards(deck);
 };

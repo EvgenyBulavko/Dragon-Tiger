@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { observer } from "mobx-react";
-import "./Settings.scss";
 import { useGameStore } from "../../store/gameStore";
+
+import "./Settings.scss";
 
 export const Settings = observer(() => {
   const { selectVolume,selectOption, isVolume } = useGameStore();
